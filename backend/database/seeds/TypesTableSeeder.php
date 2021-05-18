@@ -22,7 +22,10 @@ class TypesTableSeeder extends Seeder
                 'type_name' => 'monitor'
             ],
             [
-                'type_name' => 'audio'
+                'type_name' => 'headphone'
+            ],
+            [
+                'type_name' => 'earphone'
             ],
             // [
             //     'type_name' => 'pc'
