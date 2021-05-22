@@ -43,19 +43,30 @@ class LoginController extends Controller
 
     public function redirectToProvider()
     {
-        return \Socialite::driver("github")->redirect();
+        return Socialite::driver("github")->redirect();
     }
 
     public function handleProviderCallback()
     {
         try {
-            $user = \Socialite::with("github")->user();
+            $user = Socialite::with("github")->user();
         } catch (\Exception $e) {
             return redirect('/'); // エラーならトップへ転送
         }
+
+        // nameかnickNameをuserNameにする
+        if ($user->getName()) {
+            $userName = $user->getName();
+        } else {
+            $userName = $user->getNickName();
+        }
+
         // mailアドレスおよび名前を保存
-        $authUser = User::firstOrCreate(['email' => $user->getEmail(),
-                                         'name' => $user->getName()]);
+        $authUser = User::firstOrCreate([
+            'email' => $user->getEmail(),
+            'name' => $userName
+        ]);
+
         auth()->login($authUser); // ログイン
         return redirect()->to('/mypage'); // homeへ転送
     }
