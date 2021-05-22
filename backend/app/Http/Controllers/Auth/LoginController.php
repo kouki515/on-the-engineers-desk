@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,24 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectToProvider()
+    {
+        return \Socialite::driver("github")->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        try {
+            $user = \Socialite::with("github")->user();
+        } catch (\Exception $e) {
+            return redirect('/'); // エラーならトップへ転送
+        }
+        // mailアドレスおよび名前を保存
+        $authUser = User::firstOrCreate(['email' => $user->getEmail(),
+                                         'name' => $user->getName()]);
+        auth()->login($authUser); // ログイン
+        return redirect()->to('/mypage'); // homeへ転送
     }
 }
