@@ -68,6 +68,6 @@ class LoginController extends Controller
         ]);
 
         auth()->login($authUser); // ログイン
-        return redirect()->to('/mypage'); // homeへ転送
+        return redirect()->to('/mypage'); // mypageへ転送
     }
 }
