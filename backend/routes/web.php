@@ -18,3 +18,6 @@ Route::get('/mypage', 'MypageController@show')->name('mypage');
 
 Route::get('login/github', 'Auth\LoginController@redirectToProvider');
 Route::get('/login/callback/github', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/search', 'SearchController@show')->name('search');
+Route::post('/search', 'SearchController@search');

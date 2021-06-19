@@ -24,8 +24,9 @@ class HomeController extends Controller
      */
     public function show()
     {
-        $users = User::orderBy('updated_at', 'desc')->take(9)->get();
+        $users = User::orderBy('updated_at', 'desc')->take(36)->get();
 
+        // dd($users);
         return view('home', compact('users'));
     }
 }

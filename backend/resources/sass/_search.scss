@@ -1,0 +1,12 @@
+.my-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.my-card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: auto;
+}
