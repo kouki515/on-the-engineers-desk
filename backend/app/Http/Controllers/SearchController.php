@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use RakutenRws_Client;
-use App\device;
+use App\Device;
 use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
@@ -16,13 +16,13 @@ class SearchController extends Controller
 
     public function store(Request $request)
     {
-        $device = new device();
+        $device = new Device();
         $device->itemCode = $request->itemCode;
         $device->user_id = Auth::id();
 
         $device->save();
 
-        return redirect()->route('mypage');
+        return redirect()->route('mypage.show');
     }
 
     public function search(Request $request)

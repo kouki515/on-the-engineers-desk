@@ -17,12 +17,12 @@ Auth::routes();
 
 Route::get('/', 'HomeController@show')->name('home');
 
-Route::get('/mypage', 'userController@mypage')->name('mypage');
+Route::get('/mypage', 'MypageController@show')->name('mypage.show');
 
-Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
+Route::prefix('users')->group(function () {
     Route::get('show/{id}', 'UserController@show')->name('users.show');
     // Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
-  // Route::post('update/{id}', 'UserController@update')->name('users.update');
+    // Route::post('update/{id}', 'UserController@update')->name('users.update');
 });
 
 Route::prefix('search')->group(function () {

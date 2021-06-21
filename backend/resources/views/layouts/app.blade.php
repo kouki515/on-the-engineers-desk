@@ -36,7 +36,7 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             @auth
-              <li><a class="nav-link" href="{{ route('mypage') }}">My Page</a></li>
+              <li><a class="nav-link" href="{{ route('mypage.show') }}">My Page</a></li>
             @endauth
             <li><a class="nav-link" href="{{ route('search') }}">Search</a></li>
           </ul>

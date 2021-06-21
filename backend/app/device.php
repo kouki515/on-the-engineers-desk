@@ -4,12 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class device extends Model
+class Device extends Model
 {
-    protected $primaryKey = 'itemCode';
-
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 }
