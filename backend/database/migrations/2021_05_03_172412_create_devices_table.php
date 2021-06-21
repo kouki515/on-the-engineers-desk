@@ -15,7 +15,10 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('itemCode');
+            $table->string('itemName');
+            $table->integer('itemPrice');
+            $table->string('itemUrl');
+            $table->string('mediumImageUrls');
             $table->integer('user_id');
             $table->integer('type_id')->nullable();
             $table->timestamps();

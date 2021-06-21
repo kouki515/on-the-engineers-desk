@@ -8,7 +8,7 @@
       <div class="card mb-4">
         <div class="card-header">Search</div>
         <div class="card-body">
-          <form method="POST" action="{{ route('search') }}">
+          <form method="POST" action="{{ route('search.show') }}">
             @csrf
             <div class="form-group row">
               <label for="keyword" class="col-md-4 col-form-label text-md-right">キーワード</label>
@@ -49,10 +49,13 @@
                   <p class="card-text mb-3">{{ $item['itemName'] }}</p>
                 </a>
                 @auth
-                  <a href="javascript:document.getElementById('itemCode-post').submit()" class="btn btn-primary my-btn pb-2">add to my device</a>
-                  <form id="itemCode-post" action="{{ route('device.store') }}" method="post" style="display: none">
+                  <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2">マイデバイスに追加</a>
+                  <form id="item-store" action="{{ route('search.store') }}" method="post" style="display: none">
                     @csrf
-                    <input name="itemCode" type="hidden" value="{{ $item['itemCode'] }}">
+                    <input name="itemName" type="hidden" value="{{ $item ['itemName'] }}">
+                    <input name="itemPrice" type="hidden" value="{{ $item ['itemPrice'] }}">
+                    <input name="itemUrl" type="hidden" value="{{ $item ['itemUrl'] }}">
+                    <input name="mediumImageUrls" type="hidden" value="{{ $item ['mediumImageUrls'] }}">
                   </form>
                 @endauth
               </div>

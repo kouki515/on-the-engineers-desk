@@ -27,7 +27,14 @@
                       <p class="card-text mb-3">{{ $item['itemName'] }}</p>
                     </a>
                     @auth
-                      <a href="#" class="btn btn-primary my-btn pb-2">add to my device</a>
+                      <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2">マイデバイスに追加</a>
+                      <form id="item-store" action="{{ route('users.store') }}" method="post" style="display: none">
+                        @csrf
+                        <input name="itemName" type="hidden" value="{{ $item ['itemName'] }}">
+                        <input name="itemPrice" type="hidden" value="{{ $item ['itemPrice'] }}">
+                        <input name="itemUrl" type="hidden" value="{{ $item ['itemUrl'] }}">
+                        <input name="mediumImageUrls" type="hidden" value="{{ $item ['mediumImageUrls'] }}">
+                      </form>
                     @endauth
                   </div>
                 </div>

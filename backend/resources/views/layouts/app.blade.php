@@ -38,7 +38,7 @@
             @auth
               <li><a class="nav-link" href="{{ route('mypage.show') }}">My Page</a></li>
             @endauth
-            <li><a class="nav-link" href="{{ route('search') }}">Search</a></li>
+            <li><a class="nav-link" href="{{ route('search.show') }}">Search</a></li>
           </ul>
 
           <!-- Right Side Of Navbar -->

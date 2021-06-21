@@ -17,23 +17,22 @@ Auth::routes();
 
 Route::get('/', 'HomeController@show')->name('home');
 
-Route::get('/mypage', 'MypageController@show')->name('mypage.show');
+Route::prefix('mypage')->group(function () {
+    Route::get('/', 'MypageController@show')->name('mypage.show');
+    Route::post('/delete', 'MypageController@delete')->name('mypage.delete');
+});
 
 Route::prefix('users')->group(function () {
     Route::get('show/{id}', 'UserController@show')->name('users.show');
-    // Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
-    // Route::post('update/{id}', 'UserController@update')->name('users.update');
+    Route::post('store', 'UserController@store')->name('users.store');
 });
 
 Route::prefix('search')->group(function () {
-    Route::get('/', 'SearchController@show')->name('search');
+    Route::get('/', 'SearchController@show')->name('search.show');
     Route::post('/', 'SearchController@search');
 
-    Route::post('/store', 'SearchController@store')->name('device.store');
+    Route::post('/store', 'SearchController@store')->name('search.store');
 });
-
-Route::get('/test', 'TestController@show')->name('test');
-Route::post('/test', 'TestController@test');
 
 // Github OAuth
 Route::get('login/github', 'Auth\LoginController@redirectToProvider');

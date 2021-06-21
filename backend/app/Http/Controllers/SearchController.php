@@ -17,7 +17,10 @@ class SearchController extends Controller
     public function store(Request $request)
     {
         $device = new Device();
-        $device->itemCode = $request->itemCode;
+        $device->itemName = $request->itemName;
+        $device->itemPrice = $request->itemPrice;
+        $device->itemUrl = $request->itemUrl;
+        $device->mediumImageUrls = $request->mediumImageUrls;
         $device->user_id = Auth::id();
 
         $device->save();
@@ -58,7 +61,6 @@ class SearchController extends Controller
                 'itemName' => $item['itemName'],
                 'itemPrice' => $item['itemPrice'],
                 'itemUrl' => $item['itemUrl'],
-                'itemCode' => $item['itemCode'],
                 'mediumImageUrls' => $str,
             );
                 }
