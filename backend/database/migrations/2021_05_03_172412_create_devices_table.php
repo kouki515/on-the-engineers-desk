@@ -15,9 +15,9 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('itemCode');
             $table->integer('user_id');
-            $table->integer('type_id');
-            $table->text('amazon_url');
+            $table->integer('type_id')->nullable();
             $table->timestamps();
         });
     }

@@ -11,13 +11,30 @@
 |
 */
 
+use App\Http\Controllers\SearchController;
+
 Auth::routes();
 
 Route::get('/', 'HomeController@show')->name('home');
-Route::get('/mypage', 'MypageController@show')->name('mypage');
 
+Route::get('/mypage', 'userController@mypage')->name('mypage');
+
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
+    Route::get('show/{id}', 'UserController@show')->name('users.show');
+    // Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
+  // Route::post('update/{id}', 'UserController@update')->name('users.update');
+});
+
+Route::prefix('search')->group(function () {
+    Route::get('/', 'SearchController@show')->name('search');
+    Route::post('/', 'SearchController@search');
+
+    Route::post('/store', 'SearchController@store')->name('device.store');
+});
+
+Route::get('/test', 'TestController@show')->name('test');
+Route::post('/test', 'TestController@test');
+
+// Github OAuth
 Route::get('login/github', 'Auth\LoginController@redirectToProvider');
 Route::get('/login/callback/github', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('/search', 'SearchController@show')->name('search');
-Route::post('/search', 'SearchController@search');

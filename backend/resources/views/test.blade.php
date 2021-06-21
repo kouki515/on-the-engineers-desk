@@ -8,14 +8,14 @@
       <div class="card mb-4">
         <div class="card-header">Search</div>
         <div class="card-body">
-          <form method="POST" action="{{ route('search') }}">
+          <form method="POST" action="{{ route('test') }}">
             @csrf
             <div class="form-group row">
-              <label for="keyword" class="col-md-4 col-form-label text-md-right">キーワード</label>
+              <label for="itemCode" class="col-md-4 col-form-label text-md-right">itemcode</label>
               <div class="col-md-6">
-                <input id="keyword" type="keyword" class="form-control" name="keyword" value="{{ old('keyword') }}" required autofocus>
+                <input id="itemCode" type="itemCode" class="form-control" name="itemCode" value="{{ old('itemCode') }}" required autofocus>
 
-                @error('keyword')
+                @error('itemCode')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -36,6 +36,7 @@
 
     <div class="col-md-12">
 
+
       @if(isset($items))
         <div class="grid my-grid">
 
@@ -48,13 +49,7 @@
                 <a href="{{ $item['itemUrl'] }}" target=”_blank”>
                   <p class="card-text mb-3">{{ $item['itemName'] }}</p>
                 </a>
-                @auth
-                  <a href="javascript:document.getElementById('itemCode-post').submit()" class="btn btn-primary my-btn pb-2">add to my device</a>
-                  <form id="itemCode-post" action="{{ route('device.store') }}" method="post" style="display: none">
-                    @csrf
-                    <input name="itemCode" type="hidden" value="{{ $item['itemCode'] }}">
-                  </form>
-                @endauth
+                <a href="#" class="btn btn-primary my-btn pb-2">add to my device</a>
               </div>
             </div>
           @endforeach

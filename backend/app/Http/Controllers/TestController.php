@@ -4,28 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use RakutenRws_Client;
-use App\device;
-use Illuminate\Support\Facades\Auth;
 
-class SearchController extends Controller
+class TestController extends Controller
 {
     public function show()
     {
-        return view('search');
+        return view('test');
     }
 
-    public function store(Request $request)
-    {
-        $device = new device();
-        $device->itemCode = $request->itemCode;
-        $device->user_id = Auth::id();
-
-        $device->save();
-
-        return redirect()->route('mypage');
-    }
-
-    public function search(Request $request)
+    public function test(Request $request)
     {
         //楽天APIを扱うRakutenRws_Clientクラスのインスタンスを作成
         $client = new RakutenRws_Client();
@@ -38,13 +25,13 @@ class SearchController extends Controller
         $client->setApplicationId(RAKUTEN_APPLICATION_ID);
 
         //リクエストから検索キーワードを取り出し
-        $keyword = $request->input('keyword');
+        $itemCode = $request->input('itemCode');
 
         // IchibaItemSearch API から、指定条件で検索
-        if (!empty($keyword)) {
+        if (!empty($itemCode)) {
             $response = $client->execute('IchibaItemSearch', array(
             //入力パラメーター
-            'keyword' => $keyword,
+            'itemCode' => $itemCode,
         ));
             // レスポンスが正しいかを isOk() で確認することができます
             if ($response->isOk()) {
@@ -58,12 +45,11 @@ class SearchController extends Controller
                 'itemName' => $item['itemName'],
                 'itemPrice' => $item['itemPrice'],
                 'itemUrl' => $item['itemUrl'],
-                'itemCode' => $item['itemCode'],
                 'mediumImageUrls' => $str,
             );
                 }
                 // dd($items);
-                return view('search', compact('items'));
+                return view('test', compact('items'));
             } else {
                 echo 'Error:'.$response->getMessage();
             }
