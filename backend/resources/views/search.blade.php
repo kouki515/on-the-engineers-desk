@@ -6,7 +6,7 @@
 
     <div class="col-md-8">
       <div class="card mb-4">
-        <div class="card-header">Search</div>
+        <div class="card-header">検索</div>
         <div class="card-body">
           <form method="POST" action="{{ route('search.show') }}">
             @csrf

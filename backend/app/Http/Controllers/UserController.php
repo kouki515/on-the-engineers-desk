@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Device;
+use Illuminate\Routing\Route;
 use RakutenRws_Client;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,11 @@ class userController extends Controller
     {
         // ユーザーデータを取得
         $user = User::findorFail($id);
+
+        if ($id == Auth::id()) {
+            return redirect()->route('mypage.show');
+        }
+
         // ユーザーに紐付いたアイテムのレコードを取得
         $items = $user->devices()->get();
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-8">
       <div class=".bg-light">
         <div class="card">
           <div class="card-header h2">
@@ -13,9 +13,23 @@
           <div class="card-body">
             <h5 class="card-title">
               @if($user['self_introduction'] === null)
-                自己紹介を追加
+                <form id="newSi" action="{{ route('mypage.newSi') }}" method="post">
+                  @csrf
+                  <div class="form-group">
+                    <textarea class="form-control" name="si" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">自己紹介を追加</button>
+                </form>
               @else
-                自己紹介を変更
+                <div class="d-flex justify-content-between">
+                  <div>
+                    {{ $user->self_introduction }}
+                  </div>
+
+                  <div>
+                    <a href="{{ route('si.show') }}" class="btn btn-primary">編集</a>
+                  </div>
+                </div>
               @endif
             </h5>
 

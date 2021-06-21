@@ -9,7 +9,9 @@
 
         @foreach($users as $user)
           <div class="card">
-            <div class="card-header">{{ $user->name }}</div>
+            <div class="card-header">
+              <a href="{{ Route('users.show', ['id' => $user->id]) }}">{{ $user->name }}</a>
+            </div>
 
             <div class="card-body">
               {{ $user->self_introduction }}
