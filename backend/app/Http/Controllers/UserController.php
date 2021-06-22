@@ -23,7 +23,13 @@ class userController extends Controller
         // ユーザーに紐付いたアイテムのレコードを取得
         $items = $user->devices()->get();
 
-        return view('user', compact('user', 'items'));
+        $sum = 0;
+
+        foreach ($items as $item) {
+            $sum += $item['itemPrice'];
+        }
+
+        return view('user', compact('user', 'items', 'sum'));
     }
 
     public function store(Request $request)

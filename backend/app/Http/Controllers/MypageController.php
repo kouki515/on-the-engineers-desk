@@ -15,7 +15,13 @@ class MypageController extends Controller
 
         $items = $user->devices()->get();
 
-        return view('mypage', compact('user', 'items'));
+        $sum = 0;
+
+        foreach ($items as $item) {
+            $sum += $item['itemPrice'];
+        }
+
+        return view('mypage', compact('user', 'items', 'sum'));
     }
 
     public function delete(Request $request)

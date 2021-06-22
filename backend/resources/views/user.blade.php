@@ -15,6 +15,8 @@
               {{ $user['self_introduction'] }}
             </h5>
 
+            <h3 class="mt-4">デバイスの合計金額は{{ $sum }}円</h3>
+
             <div class="grid my-grid">
 
               @foreach($items as $item)
@@ -26,8 +28,11 @@
                     <a href="{{ $item['itemUrl'] }}" target=”_blank”>
                       <p class="card-text mb-3">{{ $item['itemName'] }}</p>
                     </a>
+                    <p class="h3 card-text mb-2">
+                      {{ number_format($item['itemPrice']) }}円
+                    </p>
                     @auth
-                      <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2">マイデバイスに追加</a>
+                      <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2 w-100">マイデバイスに追加</a>
                       <form id="item-store" action="{{ route('users.store') }}" method="post" style="display: none">
                         @csrf
                         <input name="itemName" type="hidden" value="{{ $item ['itemName'] }}">

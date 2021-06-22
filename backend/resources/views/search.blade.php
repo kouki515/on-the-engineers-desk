@@ -48,16 +48,21 @@
                 <a href="{{ $item['itemUrl'] }}" target=”_blank”>
                   <p class="card-text mb-3">{{ $item['itemName'] }}</p>
                 </a>
-                @auth
-                  <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2">マイデバイスに追加</a>
-                  <form id="item-store" action="{{ route('search.store') }}" method="post" style="display: none">
-                    @csrf
-                    <input name="itemName" type="hidden" value="{{ $item ['itemName'] }}">
-                    <input name="itemPrice" type="hidden" value="{{ $item ['itemPrice'] }}">
-                    <input name="itemUrl" type="hidden" value="{{ $item ['itemUrl'] }}">
-                    <input name="mediumImageUrls" type="hidden" value="{{ $item ['mediumImageUrls'] }}">
-                  </form>
-                @endauth
+                <div>
+                  <p class="h3 card-text mb-2">
+                    {{ number_format($item['itemPrice']) }}円
+                  </p>
+                  @auth
+                    <a href="javascript:document.getElementById('item-store').submit()" class="btn btn-primary my-btn pb-2 w-100">マイデバイスに追加</a>
+                    <form id="item-store" action="{{ route('search.store') }}" method="post" style="display: none">
+                      @csrf
+                      <input name="itemName" type="hidden" value="{{ $item ['itemName'] }}">
+                      <input name="itemPrice" type="hidden" value="{{ $item ['itemPrice'] }}">
+                      <input name="itemUrl" type="hidden" value="{{ $item ['itemUrl'] }}">
+                      <input name="mediumImageUrls" type="hidden" value="{{ $item ['mediumImageUrls'] }}">
+                    </form>
+                  @endauth
+                </div>
               </div>
             </div>
           @endforeach
